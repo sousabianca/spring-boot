@@ -32,7 +32,15 @@
 
         </dependency>
         <!--data-jpa classes que operam com a base de dado -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!--driver do banco de dados(em memória)-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
     </dependencies>
 
 
