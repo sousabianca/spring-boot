@@ -31,8 +31,11 @@ public class Clientes {
                 cliente.getNome(), cliente.getId()});
             return cliente;
         };
+    public void deletar(Cliente cliente){
+        deletar(cliente.getId());
+    }
 
-    public void deletar (Cliente id){
+    public void deletar (Integer id){
         jdbcTemplate.update(DELETE, new Object[]{id});
     }
 
