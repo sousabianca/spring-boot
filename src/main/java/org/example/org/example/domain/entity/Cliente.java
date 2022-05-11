@@ -1,9 +1,17 @@
 package org.example.org.example.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name="cliente")
+
 public class Cliente {
-
-
+//    @Id define a PK dessa entidade
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)//Indentifica o autoincrement
+    @Column(name = "id")
     private Integer id;
+    @Column(name= "nome", length = 100) //não é necessário porque o prórpio entity já define que são campos de coluna
     private String nome;
 
     public Cliente() {
