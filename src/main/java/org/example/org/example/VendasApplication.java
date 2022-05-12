@@ -21,38 +21,42 @@ public class VendasApplication {
             clientes.save(new Cliente("Francisca Alves"));
 
 
-            List<Cliente> todosClientes = clientes.findAll();
-            todosClientes.forEach(System.out::println);
+            
+//            boolean existe = clientes.existsByNome("Bianca Sousa");
+//            System.out.println("Existe um cliente com o nome Bianca? "+existe);
 
-            System.out.println("Atualizando clientes");
+            List<Cliente> result = clientes.encontrarPorNome("Bianca Sousa");
+            result.forEach(System.out::println);
 
-            todosClientes.forEach(c->{
-                c.setNome(c.getNome()+ " atualizado.");
-                clientes.save(c); //save tanto salva como atualiza
-            });
-            todosClientes = clientes.findAll();
-            todosClientes.forEach(System.out::println);
-
-            System.out.println("Buscando clientes");
-
-            clientes.findByNomeLike("Al").forEach(System.out::println);
-
-            System.out.println("Deletando clientes");
-            clientes.findAll().forEach(c->{
-                clientes.delete(c);
-            });
-
-            todosClientes= clientes.findAll();
-            if(todosClientes.isEmpty()){
-                System.out.println("Nenhum cliente encontrado");
-            }else{
-                todosClientes.forEach(System.out::println);
-            }
+//            System.out.println("Atualizando clientes");
+//
+//            todosClientes.forEach(c->{
+//                c.setNome(c.getNome()+ " atualizado.");
+//                clientes.save(c); //save tanto salva como atualiza
+//            });
+//            todosClientes = clientes.findAll();
+//            todosClientes.forEach(System.out::println);
+//
+//            System.out.println("Buscando clientes");
+//
+//            clientes.findByNomeLike("Al").forEach(System.out::println);
+//
+//            System.out.println("Deletando clientes");
+//            clientes.findAll().forEach(c->{
+//                clientes.delete(c);
+//            });
+//
+//            todosClientes= clientes.findAll();
+//            if(todosClientes.isEmpty()){
+//                System.out.println("Nenhum cliente encontrado");
+//            }else{
+//                todosClientes.forEach(System.out::println);
+//            }
 
 
         };
     }
     public static void main(String[] args) {
-        SpringApplication.run(VendasApplicationAntigo.class);
+        SpringApplication.run(VendasApplication.class);
     }
 }
