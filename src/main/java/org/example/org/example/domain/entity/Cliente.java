@@ -1,6 +1,7 @@
 package org.example.org.example.domain.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table (name="cliente")
@@ -13,6 +14,19 @@ public class Cliente {
     private Integer id;
     @Column(name= "nome", length = 100) //não é necessário porque o prórpio entity já define que são campos de coluna
     private String nome;
+//mapeamento de pedidos, para obter todos os pedidos de cliente
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private Set<Pedido> pedidos;
+//o set não aceita itens repetidos
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+
 
     public Cliente() {
     }

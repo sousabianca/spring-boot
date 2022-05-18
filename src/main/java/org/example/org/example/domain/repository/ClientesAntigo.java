@@ -1,4 +1,4 @@
-package org.example.org.example.domain.repositorio;
+package org.example.org.example.domain.repository;
 
 import org.example.org.example.domain.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;

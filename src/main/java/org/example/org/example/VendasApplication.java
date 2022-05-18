@@ -1,32 +1,47 @@
 package org.example.org.example;
 
 import org.example.org.example.domain.entity.Cliente;
-import org.example.org.example.domain.repositorio.Clientes;
-import org.example.org.example.domain.repositorio.ClientesAntigo;
+import org.example.org.example.domain.entity.Pedido;
+import org.example.org.example.domain.repository.Clientes;
+import org.example.org.example.domain.repository.Pedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 @SpringBootApplication
 public class VendasApplication {
     @Bean
-    public CommandLineRunner init (@Autowired Clientes clientes){
+    public CommandLineRunner init (@Autowired Clientes clientes,
+                                   @Autowired Pedidos pedidos){
         return args -> {
-            System.out.println("Salvando Clientes");
-            clientes.save(new Cliente("Bianca Sousa"));
+            System.out.println("Salvando  Clientes");
+//            clientes.save(new Cliente("Bianca Sousa"));
+//
+//            clientes.save(new Cliente("Francisca Alves"));
+            Cliente fulano = new Cliente("Fulano");
+            clientes.save(fulano);
+            Pedido p = new Pedido();
+            p.setCliente(fulano);
+            p.setDataPedido(LocalDate.now()); //data atual
+            p.setTotal(BigDecimal.valueOf(100));
+            pedidos.save(p);
 
-            clientes.save(new Cliente("Francisca Alves"));
+            pedidos.findByCliente(fulano).forEach(System.out::println);
 
+//            Cliente cliente = clientes.findClienteFetchPedidos(fulano.getId());
+//            System.out.println(cliente);
+//            System.out.println(cliente.getPedidos());
 
-            
 //            boolean existe = clientes.existsByNome("Bianca Sousa");
 //            System.out.println("Existe um cliente com o nome Bianca? "+existe);
 
-            List<Cliente> result = clientes.encontrarPorNome("Bianca Sousa");
-            result.forEach(System.out::println);
+//            List<Cliente> result = clientes.encontrarPorNome("Bianca Sousa");
+//            result.forEach(System.out::println);
 
 //            System.out.println("Atualizando clientes");
 //

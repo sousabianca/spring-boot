@@ -2,10 +2,22 @@ package org.example.org.example.domain.entity;
 
 import org.springframework.context.annotation.Profile;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "item_pedido")
 public class ItemPedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "id")
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+    @ManyToOne
+    @JoinColumn(name = "prod_id")
     private Produto produto;
+    @Column(name = "quantidade")
     private Integer quantidade;
 
     public Integer getId() {
