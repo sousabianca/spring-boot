@@ -1,37 +1,45 @@
 package org.example.org.example;
 
 import org.example.org.example.domain.entity.Cliente;
-import org.example.org.example.domain.entity.Pedido;
 import org.example.org.example.domain.repository.Clientes;
-import org.example.org.example.domain.repository.Pedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 @SpringBootApplication
 public class VendasApplication {
     @Bean
-    public CommandLineRunner init (@Autowired Clientes clientes,
-                                   @Autowired Pedidos pedidos){
+    public CommandLineRunner commandLineRunner (@Autowired Clientes clientes){
         return args -> {
-            System.out.println("Salvando  Clientes");
-//            clientes.save(new Cliente("Bianca Sousa"));
-//
-//            clientes.save(new Cliente("Francisca Alves"));
-            Cliente fulano = new Cliente("Fulano");
-            clientes.save(fulano);
-            Pedido p = new Pedido();
-            p.setCliente(fulano);
-            p.setDataPedido(LocalDate.now()); //data atual
-            p.setTotal(BigDecimal.valueOf(100));
-            pedidos.save(p);
+            Cliente c = new Cliente(null, "Fulano");
+            clientes.save(c);
 
-            pedidos.findByCliente(fulano).forEach(System.out::println);
+        };
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(VendasApplication.class);
+    }
+
+//    @Bean
+//    public CommandLineRunner init (@Autowired Clientes clientes,
+//                                   @Autowired Pedidos pedidos){
+//        return args -> {
+//            System.out.println("Salvando  Clientes");
+////            clientes.save(new Cliente("Bianca Sousa"));
+////
+////            clientes.save(new Cliente("Francisca Alves"));
+//            Cliente fulano = new Cliente("Fulano");
+//            clientes.save(fulano);
+//            Pedido p = new Pedido();
+//            p.setCliente(fulano);
+//            p.setDataPedido(LocalDate.now()); //data atual
+//            p.setTotal(BigDecimal.valueOf(100));
+//            pedidos.save(p);
+//
+//            pedidos.findByCliente(fulano).forEach(System.out::println);
 
 //            Cliente cliente = clientes.findClienteFetchPedidos(fulano.getId());
 //            System.out.println(cliente);
@@ -67,11 +75,9 @@ public class VendasApplication {
 //            }else{
 //                todosClientes.forEach(System.out::println);
 //            }
+//
+//
+//        };
+//    }
 
-
-        };
-    }
-    public static void main(String[] args) {
-        SpringApplication.run(VendasApplication.class);
-    }
 }
